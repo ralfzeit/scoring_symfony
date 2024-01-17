@@ -1,7 +1,7 @@
-#Web-приложение для расчета скоринга клиентов
+# Web-приложение для расчета скоринга клиентов
 
-PHP 8.2 + Symfony 7 + MySQL + PHPUnit
+Использовались Docker, PHP 8.2, Symfony 7, MySQL, PHPUnit, Xdebug 3.3
 
-##Установка
+## Установка
 
 In process...
