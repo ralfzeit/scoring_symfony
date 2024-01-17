@@ -1,0 +1,36 @@
+version: "3"
+services:
+  nginx:
+    container_name: scoring-nginx
+    build:
+      context: ./docker/nginx
+    volumes:
+      - ./:/scoring_symfony
+    ports:
+      - "80:80"
+
+  php:
+    container_name: scoring-php
+    build:
+      context: ./docker/php
+    volumes:
+      - ./:/scoring_symfony
+    expose:
+      - 9000
+
+  mysql:
+    container_name: scoring-mysql
+    image: mysql:latest
+    command: --default-authentication-plugin=caching_sha2_password
+    environment:
+      - "MYSQL_ROOT_PASSWORD=ralfzeit"
+      - "MYSQL_DATABASE=scoring"
+      - "MYSQL_USER=scoring"
+      - "MYSQL_PASSWORD=symfony"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql:/var/lib/mysql
+
+volumes:
+  mysql:
