@@ -11,6 +11,7 @@ RUN cd /tmp && \
     make install && \
     rm -rf /tmp/xdebug
 RUN docker-php-ext-enable xdebug
+RUN docker-php-ext-install pdo_mysql
 COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 WORKDIR /scoring_symfony
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
