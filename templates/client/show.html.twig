@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Client{% endblock %}
+{% block title %}Клиент{% endblock %}
 
 {% block body %}
-    <h1>Client</h1>
+    <h1>Клиент</h1>
 
     <table class="table">
         <tbody>
@@ -12,15 +12,15 @@
                 <td>{{ client.id }}</td>
             </tr>
             <tr>
-                <th>Name</th>
+                <th>Имя</th>
                 <td>{{ client.name }}</td>
             </tr>
             <tr>
-                <th>Surname</th>
+                <th>Фамилия</th>
                 <td>{{ client.surname }}</td>
             </tr>
             <tr>
-                <th>Phone</th>
+                <th>Номер телефона</th>
                 <td>{{ client.phone }}</td>
             </tr>
             <tr>
@@ -28,15 +28,15 @@
                 <td>{{ client.email }}</td>
             </tr>
             <tr>
-                <th>Agree</th>
+                <th>Согласие на обработку данных</th>
                 <td>{{ client.agree ? 'Yes' : 'No' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_client_index') }}">back to list</a>
+    <a href="{{ path('app_client_index') }}">Назад к списку</a>
 
-    <a href="{{ path('app_client_edit', {'id': client.id}) }}">edit</a>
+    <a href="{{ path('app_client_edit', {'id': client.id}) }}">Редактировать</a>
 
     {{ include('client/_delete_form.html.twig') }}
 {% endblock %}
