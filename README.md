@@ -15,4 +15,9 @@
 4. Запускаем сервисы в фоне:
 `docker-compose up -d`
 
-5. 
+5. Выполняем миграцию:
+`docker exec -ti scoring-php php bin/console doctrine:migrations:migrate`
+
+6. Заполняем БД тестовыми данными:
+`docker exec -ti scoring-php php bin/console doctrine:fixtures:load` 
+На вопрос системы отвечаем `yes`

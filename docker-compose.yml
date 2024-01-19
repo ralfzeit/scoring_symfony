@@ -8,6 +8,11 @@ services:
       - ./:/scoring_symfony
     ports:
       - "80:80"
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - scoring-network
 
   php:
     container_name: scoring-php
@@ -17,11 +22,13 @@ services:
       - ./:/scoring_symfony
     expose:
       - 9000
+    networks:
+      - scoring-network
 
   mysql:
     container_name: scoring-mysql
     image: mysql:latest
-    command: --default-authentication-plugin=caching_sha2_password
+    command: --default-authentication-plugin=caching_sha2_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     environment:
       - "MYSQL_ROOT_PASSWORD=ralfzeit"
       - "MYSQL_DATABASE=scoring"
@@ -31,6 +38,11 @@ services:
       - "3306:3306"
     volumes:
       - mysql:/var/lib/mysql
+    networks:
+      - scoring-network
+
+networks:
+  scoring-network:
 
 volumes:
   mysql:
