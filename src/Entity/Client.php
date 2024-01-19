@@ -33,6 +33,9 @@ class Client
     #[ORM\JoinColumn(nullable: false)]
     private ?Education $education_id = null;
 
+    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    private ?int $score = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +109,18 @@ class Client
     public function setEducationId(?Education $education_id): static
     {
         $this->education_id = $education_id;
+
+        return $this;
+    }
+
+    public function getScore(): ?int
+    {
+        return $this->score;
+    }
+
+    public function setScore(?int $score): static
+    {
+        $this->score = $score;
 
         return $this;
     }
