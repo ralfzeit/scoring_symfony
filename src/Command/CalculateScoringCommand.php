@@ -28,11 +28,18 @@ class CalculateScoringCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $id = $input->getArgument('id');
+
+        //Расчет скоринга для всех клиентов
         if(!$id) 
-            $output->writeln('Расчет скоринга для всех клиентов');
+            $output->writeln('<fg=green>Расчет скоринга для всех клиентов</>');
+        //Расчет скоринга для одного клиента
         else if ((is_int($id) || ctype_digit($id)) && (int)$id >= 0 )
-            $output->writeln('Client ID: '.$input->getArgument('id'));
-        else return Command::INVALID;
+            $output->writeln('<fg=blue>Расчет скоринга для клиента с id='.$input->getArgument('id'));
+        //Если введен неправильный аргумент
+        else {
+            $output->writeln('<fg=red>Введено некорректное значение id</>');
+            return Command::INVALID;
+        }
 
         return Command::SUCCESS;
     }

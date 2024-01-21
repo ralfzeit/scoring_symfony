@@ -32,3 +32,16 @@
 ## Запуск
 
 1. После установки перейдите по ссылке: `http://127.0.0.1/client`
+
+2. Консольная функция app:calculate-scoring (или app:cs) выполняет расчет скоринга для всех клиентов. Также может принимать в качестве аргумента id клиента и расчитать скоринг только для него. Выводит в консоль актуальный скоринг в БД + выводит скоринг с детализацией в консоль.
+
+Пример выполнения:
+Расчет для всех клиентов:
+`docker exec -ti scoring-php php bin/console app:calculate-scoring`
+или
+`docker exec -ti scoring-php php bin/console app:cs`
+
+Расчет для клиента с id=5
+`docker exec -ti scoring-php php bin/console app:calculate-scoring 5`
+или
+`docker exec -ti scoring-php php bin/console app:cs 5`
