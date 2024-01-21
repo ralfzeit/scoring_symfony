@@ -34,7 +34,7 @@ class ClientType extends AbstractType
                 'label' => 'Образование',
             ])
             ->add('agree', CheckboxType::class, [
-                'label' => 'Email',
+                'label' => 'Я даю согласие на обработку моих личных данных',
             ])
         ;
     }

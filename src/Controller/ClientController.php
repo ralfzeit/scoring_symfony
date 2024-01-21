@@ -31,7 +31,7 @@ class ClientController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $client->setScore($sc->calculateScore($client->getPhone(), $client->getEmail(), 'Высшее образование', $client->isAgree()));
+            $client->setScore($sc->calculateScore($client->getPhone(), $client->getEmail(), $client->getEducationId()->getTitle(), $client->isAgree()));
             $entityManager->persist($client);
             $entityManager->flush();
 
