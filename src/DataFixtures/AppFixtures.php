@@ -18,6 +18,7 @@ class AppFixtures extends Fixture
             3 => "ttk.ru",
             4 => "microsoft.com",
         );
+        $chars = "abcdefghijklmno";
 
         //Добавляем уровни образования
         $education[0] = new Education();
@@ -38,9 +39,10 @@ class AppFixtures extends Fixture
             $client->setName('Клиент '.$i);
             $client->setSurname(('Клиентов '.$i));
             $client->setEducationId($education[random_int(0,2)]);
-            $client->setEmail($domains[random_int(0,4)]);
+            $client->setEmail(str_shuffle($chars).'@'.$domains[random_int(0,4)]);
             $client->setAgree((bool)random_int(0, 1));
             $client->setPhone('7'.(string)random_int(903,989).(string)random_int(1000000,9999999));
+            $manager->persist($client);
         }
 
         $manager->flush();
