@@ -2,11 +2,9 @@
 
 namespace App\Service;
 
-use App\Entity\Client;
-
 class ScoringService
 {
-    public function calculateScore(String $phone, String $email, String $education, bool $agree): string
+    public function calculateScoreReg(String $phone, String $email, String $education, bool $agree): string
     {
         $providerCode = (int)substr($phone, 1, 3);
         $mailDomain = substr($email, 0, strripos($email, '.')); 
