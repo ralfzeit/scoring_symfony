@@ -20,7 +20,8 @@
 
 6. Заполняем БД тестовыми данными:  
 `docker exec -ti scoring-php php bin/console doctrine:fixtures:load`  
-На вопрос системы отвечаем `yes`
+На вопрос системы отвечаем `yes`  
+**Вся существующая информация в БД будет удалена**  
 
 Должны выполниться:
 > purging database  

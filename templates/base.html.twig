@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Скоринг клиентов{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {% block stylesheets %}
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"/>
         {% endblock %}
 
         {% block javascripts %}
@@ -13,6 +15,7 @@
         <script>
             $("#client_phone").mask("(999) 999-9999");
         </script> 
+        <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
         {% endblock %}
     </head>
     <body>
