@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Service\ScoringService;
 use App\Entity\Client;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -21,11 +22,13 @@ class CalculateScoringCommand extends Command
 {
     private $scoringService;
     private $doctrine;
+    private $entityManager;
 
-    public function __construct(ScoringService $scoringService, ManagerRegistry $doctrine)
+    public function __construct(ScoringService $scoringService, ManagerRegistry $doctrine, EntityManagerInterface $entityManager)
     {
         $this->scoringService = $scoringService;
         $this->doctrine = $doctrine;
+        $this->entityManager = $entityManager;
 
         parent::__construct();
     }
@@ -58,6 +61,10 @@ class CalculateScoringCommand extends Command
                 $output->writeln('Актуальный скоринг в БД: '.$client->getScore());
                 $output->writeln('<fg=blue>Скоринг (сумма баллов): '.(string)$details["scoring"].'</>');
                 $output->writeln('');
+
+                $client->setScore($details["scoring"]);
+                $this->entityManager->persist($client);
+                $this->entityManager->flush();
             }
         }
         //Расчет скоринга для одного клиента
@@ -73,6 +80,10 @@ class CalculateScoringCommand extends Command
             $output->writeln('Актуальный скоринг в БД: '.$client->getScore());
             $output->writeln('<fg=blue>Скоринг (сумма баллов): '.(string)$details["scoring"].'</>');
             $output->writeln('');
+
+            $client->setScore($details["scoring"]);
+            $this->entityManager->persist($client);
+            $this->entityManager->flush();
         }
         //Если введен неправильный аргумент
         else {
