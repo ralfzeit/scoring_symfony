@@ -25,7 +25,7 @@ class ClientType extends AbstractType
                 'choice_label' => 'title',
                 'label' => 'Образование',
             ])
-            ->add('agree')
+            ->add('agree', null, ['required' => false])
         ;
     }
 

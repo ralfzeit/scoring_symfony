@@ -17,7 +17,7 @@
         </div>
         <div class="mb-3">
             <label for="client_email" class="form-label">Email</label>
-            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'pattern':'\\S+@[a-z]+.[a-z]+'}}) }}
         </div>
         <div class="mb-3">
             <label for="client_education_id" class="form-label">Образование</label>
