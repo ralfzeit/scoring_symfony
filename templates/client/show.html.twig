@@ -4,37 +4,23 @@
 
 {% block body %}
     <h1>Клиент</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ client.id }}</td>
-            </tr>
-            <tr>
-                <th>Имя</th>
-                <td>{{ client.name }}</td>
-            </tr>
-            <tr>
-                <th>Фамилия</th>
-                <td>{{ client.surname }}</td>
-            </tr>
-            <tr>
-                <th>Номер телефона</th>
-                <td>{{ client.phone }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ client.email }}</td>
-            </tr>
-            <tr>
-                <th>Согласие на обработку данных</th>
-                <td>{{ client.agree ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_client_edit', {'id': client.id}) }}" class="btn btn-primary">Редактировать</a>
-    <a href="{{ path('app_client_index') }}" class="btn btn-secondary">Назад к списку</a>
+    <div class="container py-5">
+        <div class="card shadow-sm">
+            <div class="card-body">
+              <p class="card-text">{{ client.name }} {{ client.surname }}</p>
+              <p class="card-text">Номер телефона: {{ client.phone }}</p>
+              <p class="card-text">Email: {{ client.email }}</p>
+              <p class="card-text">Образование: {{ client.getEducationId().title }}</p>
+              <p class="card-text">Согласие на обработку данных: {{ client.agree ? 'Да' : 'Нет' }}</p>
+              <p class="card-text">Скоринг: {{ client.score }}</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="{{ path('app_client_edit', {'id': client.id}) }}" class="btn btn-sm btn-outline-secondary">Редактировать</a>
+                  <a href="{{ path('app_client_index') }}" class="btn btn-sm btn-outline-secondary">Назад к списку</a>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
