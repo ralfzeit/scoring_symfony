@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Client;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,9 +17,23 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ClientRepository extends ServiceEntityRepository
 {
+    public const PAGINATOR_PER_PAGE = 6;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Client::class);
+    }
+
+    public function getClientPaginator(int $offset): Paginator
+    {
+        $query = $this->createQueryBuilder('c')
+            ->orderBy('c.name', 'ASC')
+            ->setMaxResults(self::PAGINATOR_PER_PAGE)
+            ->setFirstResult($offset)
+            ->getQuery()
+        ;
+
+        return new Paginator($query);
     }
 
 //    /**

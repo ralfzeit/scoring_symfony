@@ -11,15 +11,23 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\ScoringService;
+use Twig\Environment;
 
 #[Route('/client')]
 class ClientController extends AbstractController
 {
     #[Route('/', name: 'app_client_index', methods: ['GET'])]
-    public function index(ClientRepository $clientRepository): Response
+    //public function index(ClientRepository $clientRepository): Response
+    public function index(Request $request, Environment $twig, ClientRepository $clientRepository): Response
     {
+        $offset = max(0, $request->query->getInt('offset', 0));
+        $paginator = $clientRepository->getClientPaginator($offset);
+
         return $this->render('client/index.html.twig', [
-            'clients' => $clientRepository->findAll(),
+            //'clients' => $clientRepository->findAll(),
+            'clients' => $paginator,
+            'previous' => $offset - ClientRepository::PAGINATOR_PER_PAGE,
+            'next' => min(count($paginator), $offset + ClientRepository::PAGINATOR_PER_PAGE),
         ]);
     }
 

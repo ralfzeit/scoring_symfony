@@ -42,6 +42,7 @@ class AppFixtures extends Fixture
             $client->setEmail(str_shuffle($chars).'@'.$domains[random_int(0,4)]);
             $client->setAgree((bool)random_int(0, 1));
             $client->setPhone('7'.(string)random_int(903,989).(string)random_int(1000000,9999999));
+            $client->setScore(0);
             $manager->persist($client);
         }
 
