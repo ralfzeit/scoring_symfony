@@ -4,8 +4,9 @@
 
 {% block body %}
     <h1>Регистрация клиента</h1>
-
+    <div class="container py-5">
     {{ include('client/_form.html.twig') }}
 
-    <a href="{{ path('app_client_index') }}">Назад к списку</a>
+    <a href="{{ path('app_client_index') }}" class="btn btn-secondary">Назад к списку</a>
+    </div>
 {% endblock %}

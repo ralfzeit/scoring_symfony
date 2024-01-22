@@ -16,26 +16,16 @@ class ClientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class, [
-                'label' => 'Имя',
-            ])
-            ->add('surname', TextType::class, [
-                'label' => 'Фамилия',
-            ])
-            ->add('phone', TextType::class, [
-                'label' => 'Номер телефона',
-            ])
-            ->add('email', TextType::class, [
-                'label' => 'Email',
-            ])
+            ->add('name')
+            ->add('surname')
+            ->add('phone')
+            ->add('email')
             ->add('education_id', EntityType::class, [
                 'class' => Education::class,
                 'choice_label' => 'title',
                 'label' => 'Образование',
             ])
-            ->add('agree', CheckboxType::class, [
-                'label' => 'Я даю согласие на обработку моих личных данных',
-            ])
+            ->add('agree')
         ;
     }
 

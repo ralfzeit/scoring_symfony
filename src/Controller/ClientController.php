@@ -38,7 +38,7 @@ class ClientController extends AbstractController
         $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $client->setScore($sc->calculateScoreReg($client->getPhone(), $client->getEmail(), $client->getEducationId()->getTitle(), $client->isAgree()));
             $entityManager->persist($client);
             $entityManager->flush();
@@ -66,7 +66,7 @@ class ClientController extends AbstractController
         $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $entityManager->flush();
 
             return $this->redirectToRoute('app_client_index', [], Response::HTTP_SEE_OTHER);

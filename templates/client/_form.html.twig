@@ -1,4 +1,31 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Сохранить') }}</button>
+    <form>
+        <div class="mb-3">
+            <label for="client_name" class="form-label">Имя</label>
+            {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            <label for="client_surname" class="form-label">Фамилия</label>
+            {{ form_widget(form.surname, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            <label for="client_phone" class="form-label">Номер телефона</label>
+            {{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            <label for="client_email" class="form-label">Email</label>
+            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            <label for="client_education_id" class="form-label">Образование</label>
+            {{ form_widget(form.education_id, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3 form-check">
+            {{ form_widget(form.agree, {'attr': {'class': 'form-check-input'}}) }}
+            <label class="form-check-label" for="client_agree">Я даю согласие на обработку моих личных данных</label>
+        </div>
+        <button type="submit" class="btn btn-primary">{{ button_label|default('Сохранить') }}</button>
+    </form>
+
+    
 {{ form_end(form) }}
