@@ -7,8 +7,9 @@
     <div class="container py-5">
         <div class="card shadow-sm">
             <div class="card-body">
-              <p class="card-text">{{ client.name }} {{ client.surname }}</p>
-              <p class="card-text">Номер телефона: {{ client.phone }}</p>
+              <p class="card-text">Имя: {{ client.name }}</p>
+              <p class="card-text">Фамилия: {{ client.surname }}</p>
+              <p class="card-text">Номер телефона: +{{ client.phone }}</p>
               <p class="card-text">Email: {{ client.email }}</p>
               <p class="card-text">Образование: {{ client.getEducationId().title }}</p>
               <p class="card-text">Согласие на обработку данных: {{ client.agree ? 'Да' : 'Нет' }}</p>

@@ -10,7 +10,10 @@
         </div>
         <div class="mb-3">
             <label for="client_phone" class="form-label">Номер телефона</label>
-            {{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}
+            <div class="input-group has-validation">
+                <span class="input-group-text" id="inputGroupPrepend3">+</span>
+                {{ form_widget(form.phone, {'attr': {'class': 'form-control', 'maxlength': '11'}}) }}
+            </div>
         </div>
         <div class="mb-3">
             <label for="client_email" class="form-label">Email</label>
