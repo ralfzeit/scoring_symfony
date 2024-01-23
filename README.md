@@ -51,7 +51,8 @@
 1. Создание схемы тестовой БД:  
 `docker exec -ti scoring-php php bin/console --env=test doctrine:schema:create`  
 
-2. Тут будут тесты...  
+2. Запуск тестов:  
+`docker exec -ti scoring-php php bin/phpunit`
 
 ## Остановка Docker
 

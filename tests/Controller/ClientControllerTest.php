@@ -1,4 +1,10 @@
 <?php
+/*
+ * Тесты для контроллера клиентов
+ * 
+ * (c) Алексей Третьяков <ralfzeit@gmail.com>
+ * 
+ */
 
 namespace App\Test\Controller;
 
