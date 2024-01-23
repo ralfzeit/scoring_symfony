@@ -1,4 +1,10 @@
 <?php
+/*
+ * Фикстура для заполнения тестовыми данными
+ * 
+ * (c) Алексей Третьяков <ralfzeit@gmail.com>
+ * 
+ */
 
 namespace App\DataFixtures;
 
@@ -7,8 +13,14 @@ use App\Entity\Education;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
+/**
+ * Класс фикстуры
+ */
 class AppFixtures extends Fixture
 {
+    /**
+     * Загрузка тестовых данных в БД
+     */
     public function load(ObjectManager $manager): void
     {
         $domains = array(

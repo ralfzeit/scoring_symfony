@@ -1,4 +1,10 @@
 <?php
+/*
+ * Форма клиента
+ * 
+ * (c) Алексей Третьяков <ralfzeit@gmail.com>
+ * 
+ */
 
 namespace App\Form;
 
@@ -6,13 +12,17 @@ use App\Entity\Client;
 use App\Entity\Education;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 
+/**
+ * Класс формы клиента
+ */
 class ClientType extends AbstractType
 {
+    /**
+     * Сборка формы
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -29,6 +39,9 @@ class ClientType extends AbstractType
         ;
     }
 
+    /**
+     * Конфигурация формы
+     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

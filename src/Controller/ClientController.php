@@ -1,4 +1,10 @@
 <?php
+/*
+ * Контроллер клиентов
+ * 
+ * (c) Алексей Третьяков <ralfzeit@gmail.com>
+ * 
+ */
 
 namespace App\Controller;
 
@@ -13,24 +19,31 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Service\ScoringService;
 use Twig\Environment;
 
+/**
+ * Класс контроллера клиентов
+ */
 #[Route('/client')]
 class ClientController extends AbstractController
 {
+    /**
+     * Отображает постраничный список клиентов (отсортированы по имени)
+     */
     #[Route('/', name: 'app_client_index', methods: ['GET'])]
-    //public function index(ClientRepository $clientRepository): Response
     public function index(Request $request, Environment $twig, ClientRepository $clientRepository): Response
     {
         $offset = max(0, $request->query->getInt('offset', 0));
         $paginator = $clientRepository->getClientPaginator($offset);
 
         return $this->render('client/index.html.twig', [
-            //'clients' => $clientRepository->findAll(),
             'clients' => $paginator,
             'previous' => $offset - ClientRepository::PAGINATOR_PER_PAGE,
             'next' => min(count($paginator), $offset + ClientRepository::PAGINATOR_PER_PAGE),
         ]);
     }
 
+    /**
+     * Регистрация клиента
+     */
     #[Route('/new', name: 'app_client_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager, ScoringService $sc): Response
     {
@@ -39,7 +52,13 @@ class ClientController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            $client->setScore($sc->calculateScoreReg($client->getPhone(), $client->getEmail(), $client->getEducationId()->getTitle(), $client->isAgree()));
+            $client->setScore($sc->calculateScoreReg(
+                    $client->getPhone(), 
+                    $client->getEmail(), 
+                    $client->getEducationId()->getTitle(), 
+                    $client->isAgree()
+                    )
+                );
             $entityManager->persist($client);
             $entityManager->flush();
 
@@ -52,6 +71,9 @@ class ClientController extends AbstractController
         ]);
     }
 
+    /**
+     * Просмотр информации о клиенте
+     */
     #[Route('/{id}', name: 'app_client_show', methods: ['GET'])]
     public function show(Client $client): Response
     {
@@ -60,6 +82,9 @@ class ClientController extends AbstractController
         ]);
     }
 
+    /**
+     * Редактирование клиента
+     */
     #[Route('/{id}/edit', name: 'app_client_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Client $client, EntityManagerInterface $entityManager): Response
     {
@@ -78,6 +103,9 @@ class ClientController extends AbstractController
         ]);
     }
 
+    /**
+     * Удаление клиента
+     */
     #[Route('/{id}', name: 'app_client_delete', methods: ['POST'])]
     public function delete(Request $request, Client $client, EntityManagerInterface $entityManager): Response
     {

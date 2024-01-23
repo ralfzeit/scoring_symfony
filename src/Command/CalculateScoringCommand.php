@@ -1,4 +1,10 @@
 <?php
+/*
+ * Консольная команда для расчета скоринга
+ * 
+ * (c) Алексей Третьяков <ralfzeit@gmail.com>
+ * 
+ */
 
 namespace App\Command;
 
@@ -12,6 +18,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 
+/**
+ * Класс консольной функции
+ */
 #[AsCommand(
     name: 'app:calculate-scoring',
     description: 'Выполняет расчет скоринга клиентов.',
@@ -33,14 +42,21 @@ class CalculateScoringCommand extends Command
         parent::__construct();
     }
     
+    /**
+     * Конфигурация консольной функции
+     */
     protected function configure(): void
     {
         // сообщение помощи команды, отображаемое при запуске команды с опцией "--help"
         $this->setHelp('Данная команда позволяет Вам выполнить расчет скоринга');
+        // опциональный аргумент id
         $this->addArgument('id', InputArgument::OPTIONAL, 'ID клиента (целое число) (опционально)');
 
     }
 
+    /**
+     * Запуск консольной функции (без аргумента id - расчет скоринга с записью в БД и детализацией для всех клиентов, с id - для одного)
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $id = $input->getArgument('id');

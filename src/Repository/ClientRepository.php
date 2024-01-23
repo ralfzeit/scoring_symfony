@@ -1,4 +1,10 @@
 <?php
+/*
+ * Таблица "Клиенты"
+ * 
+ * (c) Алексей Третьяков <ralfzeit@gmail.com>
+ * 
+ */
 
 namespace App\Repository;
 
@@ -17,6 +23,9 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ClientRepository extends ServiceEntityRepository
 {
+    /**
+     * Максимальное количество клиентов на странице для пагинации
+     */
     public const PAGINATOR_PER_PAGE = 6;
 
     public function __construct(ManagerRegistry $registry)
@@ -24,6 +33,11 @@ class ClientRepository extends ServiceEntityRepository
         parent::__construct($registry, Client::class);
     }
 
+    /**
+     * Формирует пагинатор
+     * 
+     * @param $offset Смещение
+     */
     public function getClientPaginator(int $offset): Paginator
     {
         $query = $this->createQueryBuilder('c')
@@ -35,29 +49,4 @@ class ClientRepository extends ServiceEntityRepository
 
         return new Paginator($query);
     }
-
-//    /**
-//     * @return Client[] Returns an array of Client objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Client
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }
