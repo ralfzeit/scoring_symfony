@@ -62,14 +62,50 @@ class CalculateScoringCommand extends Command
         $id = $input->getArgument('id');
 
         //Расчет скоринга для всех клиентов
-        if(!$id){
+        if(!$id) {
             $output->writeln('<fg=green>Расчет скоринга для всех клиентов</>');
             
             $clients = $this->doctrine->getRepository(Client::class)->findAll();
 
-            foreach($clients as $client){
-                $details = $this->scoringService->calculateScoreForConsole($client->getPhone(), $client->getEmail(), $client->getEducationId()->getTitle(), $client->isAgree());
-                $output->writeln('ID клиента: '.$client->getId());
+            if($clients) {
+                foreach($clients as $client){
+                    $details = $this->scoringService->calculateScoreForConsole(
+                        $client->getPhone(), 
+                        $client->getEmail(), 
+                        $client->getEducationId()->getTitle(), 
+                        $client->isAgree()
+                    );
+                    $output->writeln('ID клиента: '.$client->getId());
+                    $output->writeln('Сотовый оператор: '.$details["provider"]);
+                    $output->writeln('Домен почты: '.$details["domain"]);
+                    $output->writeln('Образование: '.$details["education"]);
+                    $output->writeln('Согласие: '.$details["agree"]);
+                    $output->writeln('Актуальный скоринг в БД: '.$client->getScore());
+                    $output->writeln('<fg=blue>Скоринг (сумма баллов): '.(string)$details["scoring"].'</>');
+                    $output->writeln('');
+
+                    $client->setScore($details["scoring"]);
+                    $this->entityManager->persist($client);
+                    $this->entityManager->flush();
+                }
+            }
+            else {
+                $output->writeln('<fg=red>Клиенты не найдены</>');
+            }
+
+        }
+        //Расчет скоринга для одного клиента
+        else if((is_int($id) || ctype_digit($id)) && (int)$id >= 0 ) {
+            $output->writeln('<fg=green>Расчет скоринга с детализацией для клиента с id='.$input->getArgument('id').'</>');
+            
+            $client = $this->doctrine->getRepository(Client::class)->find($id);
+            if($client) {
+                $details = $this->scoringService->calculateScoreForConsole(
+                    $client->getPhone(), 
+                    $client->getEmail(), 
+                    $client->getEducationId()->getTitle(), 
+                    $client->isAgree()
+                );
                 $output->writeln('Сотовый оператор: '.$details["provider"]);
                 $output->writeln('Домен почты: '.$details["domain"]);
                 $output->writeln('Образование: '.$details["education"]);
@@ -82,24 +118,9 @@ class CalculateScoringCommand extends Command
                 $this->entityManager->persist($client);
                 $this->entityManager->flush();
             }
-        }
-        //Расчет скоринга для одного клиента
-        else if ((is_int($id) || ctype_digit($id)) && (int)$id >= 0 ){
-            $output->writeln('<fg=green>Расчет скоринга с детализацией для клиента с id='.$input->getArgument('id').'</>');
-            
-            $client = $this->doctrine->getRepository(Client::class)->find($id);
-            $details = $this->scoringService->calculateScoreForConsole($client->getPhone(), $client->getEmail(), $client->getEducationId()->getTitle(), $client->isAgree());
-            $output->writeln('Сотовый оператор: '.$details["provider"]);
-            $output->writeln('Домен почты: '.$details["domain"]);
-            $output->writeln('Образование: '.$details["education"]);
-            $output->writeln('Согласие: '.$details["agree"]);
-            $output->writeln('Актуальный скоринг в БД: '.$client->getScore());
-            $output->writeln('<fg=blue>Скоринг (сумма баллов): '.(string)$details["scoring"].'</>');
-            $output->writeln('');
-
-            $client->setScore($details["scoring"]);
-            $this->entityManager->persist($client);
-            $this->entityManager->flush();
+            else {
+                $output->writeln('<fg=red>Клиент не найден</>');
+            }
         }
         //Если введен неправильный аргумент
         else {

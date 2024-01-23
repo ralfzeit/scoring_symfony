@@ -45,3 +45,7 @@
 `docker exec -ti scoring-php php bin/console app:calculate-scoring 5`  
 или  
 `docker exec -ti scoring-php php bin/console app:cs 5`  
+
+## Остановка Docker
+
+`docker-compose stop`  
