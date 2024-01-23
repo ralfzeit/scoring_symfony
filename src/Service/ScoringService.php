@@ -23,18 +23,24 @@ class ScoringService
         $providerCode = (int)substr($phone, 1, 3);
 
         //Если МТС
-        if (($providerCode >= 910 && $providerCode <= 919) || 
-            ($providerCode >= 980 && $providerCode <= 989))
+        if(($providerCode >= 910 && $providerCode <= 919) || 
+            ($providerCode >= 980 && $providerCode <= 989)){
                 return 3;
+        }    
+
         //Если Билайн
-        else if (($providerCode >= 903 && $providerCode <= 906) || 
-                    ($providerCode >= 960 && $providerCode <= 968))
-                        return 5;
+        if(($providerCode >= 903 && $providerCode <= 906) || 
+            ($providerCode >= 960 && $providerCode <= 968)){
+                return 5;
+        }
+
         //Если Мегафон
-        else if ($providerCode >= 920 && $providerCode <= 938)
-                    return 10;
+        if($providerCode >= 920 && $providerCode <= 938){
+            return 10;
+        }
+
         //Если иной оператор
-        else return 1;
+        return 1;
     }
 
     /**
@@ -45,13 +51,19 @@ class ScoringService
     public function getEducationScore(String $education): int
     {
         //Если специальное
-        if (strcasecmp($education, 'Специальное образование') == 0)
+        if (strcasecmp($education, 'Специальное образование') == 0){
             return 10;
+        }
+
         //Если высшее
-        else if (strcasecmp($education, 'Высшее образование') == 0)
+        if (strcasecmp($education, 'Высшее образование') == 0){
             return 15;
+        }
+        
         //Если среднее
-        else return 5;
+        if (strcasecmp($education, 'Среднее образование') == 0){
+            return 5;
+        }
     }
 
     /**
@@ -62,11 +74,12 @@ class ScoringService
     public function getAgreeScore(bool $agree): int
     {
         //Если галочка установлена 
-        if ($agree)
+        if ($agree){
             return 4;
+        }
+
         //Если не установлена
-        else 
-            return 0;
+        return 0;
     }
 
     /**
@@ -80,16 +93,22 @@ class ScoringService
         $mailDomain = substr($mailDomain, strripos($mailDomain, '@')+1); 
 
         //Если mail
-        if (strcasecmp($mailDomain, 'mail') == 0)
+        if (strcasecmp($mailDomain, 'mail') == 0){
             return 6;
+        }
+
         //Если yandex
-        else if (strcasecmp($mailDomain, 'yandex') == 0)
+        if (strcasecmp($mailDomain, 'yandex') == 0){
             return 8;
+        }
+
         //Если gmail
-        else if (strcasecmp($mailDomain, 'gmail') == 0)
+        if (strcasecmp($mailDomain, 'gmail') == 0){
             return 10;
+        }
+
         //иной
-        else return 3;
+        return 3;
     }
 
     /**
