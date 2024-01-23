@@ -46,6 +46,13 @@
 или  
 `docker exec -ti scoring-php php bin/console app:cs 5`  
 
+## Тестирование
+
+1. Создание схемы тестовой БД:  
+`docker exec -ti scoring-php php bin/console --env=test doctrine:schema:create`  
+
+2. Тут будут тесты...  
+
 ## Остановка Docker
 
 `docker-compose stop`  
