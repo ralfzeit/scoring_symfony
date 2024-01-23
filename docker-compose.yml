@@ -38,6 +38,7 @@ services:
       - "3306:3306"
     volumes:
       - mysql:/var/lib/mysql
+      - ./init:/docker-entrypoint-initdb.d
     networks:
       - scoring-network
 
