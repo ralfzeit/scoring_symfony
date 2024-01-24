@@ -16,7 +16,7 @@ class ScoringService
     /**
      * Рассчитывает балл для оператора мобильного телефона
      * 
-     * @param $phone Номер телефона в формате 7xxxxxxxxxx
+     * @param String $phone Номер телефона в формате 7xxxxxxxxxx
      */
     public function getProdiverScore(String $phone): int
     {
@@ -46,7 +46,7 @@ class ScoringService
     /**
      * Рассчитывает балл за уровень образования
      * 
-     * @param $education Название уровня образования
+     * @param String $education Название уровня образования
      */
     public function getEducationScore(String $education): int
     {
@@ -69,7 +69,7 @@ class ScoringService
     /**
      * Рассчитывает балл за согласие на обработку данных
      * 
-     * @param $agree Согласие (true или false)
+     * @param bool $agree Согласие (true или false)
      */
     public function getAgreeScore(bool $agree): int
     {
@@ -85,7 +85,7 @@ class ScoringService
     /**
      * Рассчитывает балл за домен электронной почты
      * 
-     * @param $email Адрес электронной почты
+     * @param String $email Адрес электронной почты
      */
     public function getDomainScore(String $email): int 
     {
@@ -114,10 +114,10 @@ class ScoringService
     /**
      * Расчет скоринга для клиента во время регистрации
      * 
-     * @param $phone Номер мобильного телефона
-     * @param $email Адрес электронной почты
-     * @param $education Название уровня образования
-     * @param $agree Согласие (true или false)
+     * @param String $phone Номер мобильного телефона
+     * @param String $email Адрес электронной почты
+     * @param String $education Название уровня образования
+     * @param bool $agree Согласие (true или false)
      */
     public function calculateScoreReg(String $phone, String $email, String $education, bool $agree): string
     {
@@ -139,10 +139,10 @@ class ScoringService
     /**
      * Расчет скоринга для консольной команды
      * 
-     * @param $phone Номер мобильного телефона
-     * @param $email Адрес электронной почты
-     * @param $education Название уровня образования
-     * @param $agree Согласие (true или false)
+     * @param String $phone Номер мобильного телефона
+     * @param String $email Адрес электронной почты
+     * @param String $education Название уровня образования
+     * @param bool $agree Согласие (true или false)
      */
     public function calculateScoreForConsole(String $phone, String $email, String $education, bool $agree): array
     {

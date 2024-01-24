@@ -30,7 +30,7 @@ class ScoringServiceTest extends WebTestCase
     /**
      * Тест расчета баллов за оператора
      */
-    public function testGetProviderScore(): void
+    public function testGetProviderScore()
     {
         self::assertSame(10, $this->scoringService->getProdiverScore('79239992345'));
         self::assertSame(5, $this->scoringService->getProdiverScore('79069992345'));
@@ -41,7 +41,7 @@ class ScoringServiceTest extends WebTestCase
     /**
      * Тест расчета баллов за домен
      */
-    public function testGetDomainScore(): void
+    public function testGetDomainScore()
     {
         self::assertSame(3, $this->scoringService->getDomainScore('test@mai.ru'));
         self::assertSame(6, $this->scoringService->getDomainScore('test@mail.ru'));
@@ -55,7 +55,7 @@ class ScoringServiceTest extends WebTestCase
     /**
      * Тест расчета баллов за согласие
      */
-    public function testGetAgreeScore(): void
+    public function testGetAgreeScore()
     {
         self::assertSame(0, $this->scoringService->getAgreeScore(false));
         self::assertSame(4, $this->scoringService->getAgreeScore(true));
@@ -66,7 +66,7 @@ class ScoringServiceTest extends WebTestCase
     /**
      * Тест расчета баллов за образование
      */
-    public function testGetEducationScore(): void
+    public function testGetEducationScore()
     {
         self::assertSame(15, $this->scoringService->getEducationScore('Высшее образование'));
         self::assertSame(10, $this->scoringService->getEducationScore('Специальное образование'));
@@ -76,7 +76,7 @@ class ScoringServiceTest extends WebTestCase
     /**
      * Тест расчета скоринга во время регистрации
      */
-    public function testCalculateScoreReg(): void
+    public function testCalculateScoreReg()
     {
         self::assertSame('39', $this->scoringService->calculateScoreReg('79236431111','test@gmail.com','Высшее образование',true));
         self::assertSame('20', $this->scoringService->calculateScoreReg('79066431111','test@mail.ru','Среднее образование',true));
@@ -88,7 +88,7 @@ class ScoringServiceTest extends WebTestCase
     /**
      * Тест расчета скоринга для консольной команды
      */
-    public function testCalculateScoreForConsole(): void
+    public function testCalculateScoreForConsole()
     {
         $details = array(
             "provider" => 10,

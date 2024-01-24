@@ -69,7 +69,7 @@ class ClientControllerTest extends WebTestCase
     /**
      * Удаление всех видов образования
      */
-    protected function clearEducationTable(): void
+    protected function clearEducationTable()
     {
         foreach ($this->repositoryEdu->findAll() as $object) {
             $this->manager->remove($object);
@@ -81,7 +81,7 @@ class ClientControllerTest extends WebTestCase
     /**
      * Тест загрузки списка клиентов
      */
-    public function testIndex(): void
+    public function testIndex()
     {
         $crawler = $this->client->request('GET', $this->path);
 
@@ -92,7 +92,7 @@ class ClientControllerTest extends WebTestCase
     /**
      * Тест регистрации клиента
      */
-    public function testNew(): void
+    public function testNew()
     {
         $this->client->request('GET', sprintf('%snew', $this->path));
 
@@ -125,7 +125,7 @@ class ClientControllerTest extends WebTestCase
     /**
      * Тест отображения клиента
      */
-    public function testShow(): void
+    public function testShow()
     {
         $fixture = new Client();
         $fixture->setName('Test');
@@ -147,7 +147,7 @@ class ClientControllerTest extends WebTestCase
     /**
      * Тест редактирования клиента
      */
-    public function testEdit(): void
+    public function testEdit()
     {
         $fixture = new Client();
         $fixture->setName('Алексей');
@@ -183,7 +183,10 @@ class ClientControllerTest extends WebTestCase
         self::assertSame($this->edu[1]->getId(), $fixture[0]->getEducationId()->getId());
     }
 
-    public function testRemove(): void
+    /**
+     * Тест удаления клиента
+     */
+    public function testRemove()
     {
         $this->clearClientTable();
 
