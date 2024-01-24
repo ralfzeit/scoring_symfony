@@ -23,11 +23,6 @@
 6. Заполняем БД тестовыми данными:  
 `docker exec -ti scoring-php php bin/console doctrine:fixtures:load --append`  
 
-Должно выполниться:
-> loading App\DataFixtures\AppFixtures
-
-Если этого не произошло, выполните команду из п.6 повторно.
-
 
 ## Запуск
 
