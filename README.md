@@ -1,4 +1,4 @@
-[Задание] (https://github.com/ralfzeit/scoring_symfony/blob/main/TASK.md)
+[Задание](https://github.com/ralfzeit/scoring_symfony/blob/main/TASK.md)
 
 # Web-приложение для расчета скоринга клиентов
 
