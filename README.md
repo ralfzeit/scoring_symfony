@@ -19,12 +19,11 @@
 `docker exec -ti scoring-php php bin/console doctrine:migrations:migrate`
 
 6. Заполняем БД тестовыми данными:  
-`docker exec -ti scoring-php php bin/console doctrine:fixtures:load`  
+`docker exec -ti scoring-php php bin/console doctrine:fixtures:load --append`  
 На вопрос системы отвечаем `yes`  
 **Вся существующая информация в БД будет удалена**  
 
-Должны выполниться:
-> purging database  
+Должно выполниться:
 > loading App\DataFixtures\AppFixtures
 
 Если этого не произошло, выполните команду из п.6 повторно.

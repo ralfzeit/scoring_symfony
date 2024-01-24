@@ -85,4 +85,19 @@ class ScoringServiceTest extends WebTestCase
         self::assertSame('23', $this->scoringService->calculateScoreReg('79136431111','test@gmail.com','Специальное образование',false));
     }
 
+    /**
+     * Тест расчета скоринга для консольной команды
+     */
+    public function testCalculateScoreForConsole(): void
+    {
+        $details = array(
+            "provider" => 10,
+            "domain" => 10,
+            "education" => 15,
+            "agree" => 4,
+            "scoring" => '39',
+        );
+        self::assertSame($details, $this->scoringService->calculateScoreForConsole('79236431111','test@gmail.com','Высшее образование',true));
+    }
+
 }

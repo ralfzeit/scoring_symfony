@@ -14,7 +14,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\BrowserKit\Request;
 
 class ClientControllerTest extends WebTestCase
 {
@@ -184,4 +183,36 @@ class ClientControllerTest extends WebTestCase
         self::assertSame($this->edu[1]->getId(), $fixture[0]->getEducationId()->getId());
     }
 
+    public function testRemove(): void
+    {
+        $this->clearClientTable();
+
+        $fixture = new Client();
+        $fixture->setName('Алексей');
+        $fixture->setSurname('Третьяков');
+        $fixture->setPhone('79990019090');
+        $fixture->setEmail('alex@mail.ru');
+        $fixture->setAgree(true);
+        $fixture->setEducationId($this->edu[0]);
+
+        $fixture1 = new Client();
+        $fixture1->setName('Алексей');
+        $fixture1->setSurname('Ивнов');
+        $fixture1->setPhone('79290019090');
+        $fixture1->setEmail('alex@gmail.com');
+        $fixture1->setAgree(false);
+        $fixture1->setEducationId($this->edu[0]);
+
+        $this->manager->persist($fixture);
+        $this->manager->persist($fixture1);
+        $this->manager->flush();
+
+
+        $checkDel = $fixture->getId();
+        $this->client->request('POST', sprintf('%s%s', $this->path, $checkDel));
+
+        self::assertSame(null, $this->repositoryEdu->findOneById($checkDel));
+        self::assertResponseRedirects('/client/');
+        self::assertSame(1, $this->repository->count([]));
+    }
 }
